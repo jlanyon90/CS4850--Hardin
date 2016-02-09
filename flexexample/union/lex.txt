@@ -1,0 +1,15 @@
+%{
+#include <stdlib.h>
+#include "y.tab.h"
+%}
+DIGIT [0-9]
+WS [ \t]
+%%
+{WS}+ ;
+{DIGIT}+ { yylval.integer = atoi(yytext); return INT_TOKEN; }
+{DIGIT}+"."{DIGIT}* { sscanf(yytext,"%lf", &yylval.real); return REAL_TOKEN;}
+"+" { return PLUS;}
+"-" {return MINUS; }
+"\n" { return ENDOFLINE;  }
+%%
+ int yywrap() { return(1); }

@@ -1,0 +1,14 @@
+%{
+#include <stdlib.h>
+#define INTEGER 23
+%}
+DIGIT [0-9]
+%%
+{DIGIT}+    {yylval.integer = atoi(yytext); return INTEGER;}
+
+%%
+
+int yywrap(void)
+{
+	return 1;
+}
